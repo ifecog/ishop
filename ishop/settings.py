@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-uc64g3&(*jnb51hnt1*(lx5d101cc7tz!_m$au0wc0*kyk82es
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -138,8 +138,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'ishop/static'), ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -149,6 +149,16 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
     50: 'critical',
 }
+
+SITE_ID = 1
+
+# smtp configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'darasimisamson90@gmail.com'
+EMAIL_HOST_PASSWORD = 'tdnskkpkmgsgpkln'
+EMAIL_USE_TLS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
