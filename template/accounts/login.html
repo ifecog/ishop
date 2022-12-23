@@ -1,0 +1,66 @@
+{% extends 'base.html' %}{% block title %}Signin{% endblock title %} <p></p>
+{% block content %} {% load static %} {% load socialaccount %} {% providers_media_js %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y" style="min-height: 84vh">
+  <!-- ============================ COMPONENT LOGIN   ================================= -->
+  {% if request.GET.command == 'verification' %}
+  <div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1000px; margin-top: 100px">
+    Thank you for signing up with XCart. Check your email inbox to verify your account [{{request.GET.email}}] <br>
+    Already Verified? <a href="{% url 'login' %}">Login</a>
+  </div>
+  {% else %}
+  <div class="card mx-auto" style="max-width: 480px; margin-top: 100px">
+    <div class="card-body">
+      <h4 class="card-title mb-4 text-center">Sign in</h4>
+      {% include 'includes/messages.html' %}
+      <form action={% url 'login' %} method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            name="username"
+          />
+        </div>
+        <!-- form-group// -->
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            name="password"
+          />
+        </div>
+        <!-- form-group// -->
+
+        <div class="form-group">
+          <a href="{% url 'forgotpassword' %}" class="float-right">Forgot password?</a>
+        </div>
+        <!-- form-group form-check .// -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </div>
+        <!-- form-group// -->
+        <div class="text-center">
+          <a href="{% provider_login_url 'facebook' method='oauth2' %}" class="loginBtn loginBtn--facebook btn btn-primary">
+            <span>Login with Facebook</span>
+          </a>
+          <a href="{% provider_login_url 'google' %}" class="loginBtn loginBtn--google btn btn-primary">
+            <span>Login with Google</span>
+          </a>
+        </div> 
+      </form>
+    </div>
+   <!-- card-body.// -->
+  </div>
+  <!-- card .// -->
+
+  <p class="text-center mt-4">Don't have account? <a href="{% url 'signup' %}">Sign up</a></p>
+  <br /><br />
+  {% endif %}
+  <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock content %}
